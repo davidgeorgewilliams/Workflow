@@ -2,6 +2,29 @@
 
 ![Workflows Visual Representation](docs/Workflow.png)
 
+## About Workflows
+
+Workflows is an advanced Java library that furnishes a high-level abstraction layer for parallel workflow management and
+execution engine construction. It empowers developers to articulate and execute complex, dependent tasks in a concurrent
+environment with ease and precision. Built on the foundation of modern concurrent programming paradigms, Workflows
+streamlines the process of defining and managing task relationships and execution order through a domain-specific
+language crafted for simplicity and power.
+
+At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of **WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over thread
+pools, utilizing 'after' semantics for defining task dependencies and ensuring logical execution order; **Worker**
+encapsulates tasks with execution metadata, leveraging the `Supplier` interface for clear task definitions and detailed
+execution tracking; and **ThreadPool** streamlines asynchronous task management, providing a simplified interface for
+Java's `ExecutorService` and `CompletableFuture` APIs.
+
+Workflows is designed with performance, scalability, and ease of use in mind, providing a robust toolkit for developers
+building complex applications requiring sophisticated concurrency controls. Whether you're developing high-throughput
+data processing systems, real-time computation engines, or complex application logic, Workflows offers the constructs
+and control you need to build reliable and efficient concurrent applications.
+
+This library is the culmination of dedicated research and innovation in the field of concurrent programming. It stands
+as a testament to the collaborative spirit of the development community and is dedicated to visionaries who push the
+boundaries of technology.
+
 ## Getting Started Guide
 
 This guide will help you get started with the `Workflows` library, a sophisticated domain-specific language for
