@@ -1,10 +1,9 @@
-package com.davidgeorgewilliams.workflow.commands;
+package com.davidgeorgewilliams.workflows.commands;
 
-import com.davidgeorgewilliams.workflow.Main;
-import com.davidgeorgewilliams.workflow.threads.ThreadLocalTime;
-import com.davidgeorgewilliams.workflow.threads.ThreadPool;
-import com.davidgeorgewilliams.workflow.workflows.Worker;
-import com.davidgeorgewilliams.workflow.workflows.WorkerPool;
+import com.davidgeorgewilliams.workflows.threads.ThreadLocalTime;
+import com.davidgeorgewilliams.workflows.threads.ThreadPool;
+import com.davidgeorgewilliams.workflows.workers.Worker;
+import com.davidgeorgewilliams.workflows.workers.WorkerPool;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -14,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 

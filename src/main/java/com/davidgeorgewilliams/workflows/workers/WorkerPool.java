@@ -1,7 +1,7 @@
-package com.davidgeorgewilliams.workflow.workflows;
+package com.davidgeorgewilliams.workflows.workers;
 
-import com.davidgeorgewilliams.workflow.threads.ThreadLocalTime;
-import com.davidgeorgewilliams.workflow.threads.ThreadPool;
+import com.davidgeorgewilliams.workflows.threads.ThreadLocalTime;
+import com.davidgeorgewilliams.workflows.threads.ThreadPool;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NonNull;

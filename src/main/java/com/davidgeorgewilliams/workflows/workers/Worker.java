@@ -1,6 +1,6 @@
-package com.davidgeorgewilliams.workflow.workflows;
+package com.davidgeorgewilliams.workflows.workers;
 
-import com.davidgeorgewilliams.workflow.threads.ThreadLocalTime;
+import com.davidgeorgewilliams.workflows.threads.ThreadLocalTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

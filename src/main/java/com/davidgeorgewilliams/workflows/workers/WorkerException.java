@@ -1,4 +1,4 @@
-package com.davidgeorgewilliams.workflow.workflows;
+package com.davidgeorgewilliams.workflows.workers;
 
 import lombok.NonNull;
 

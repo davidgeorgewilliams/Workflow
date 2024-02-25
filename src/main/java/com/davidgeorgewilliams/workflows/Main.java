@@ -1,6 +1,6 @@
-package com.davidgeorgewilliams.workflow;
+package com.davidgeorgewilliams.workflows;
 
-import com.davidgeorgewilliams.workflow.commands.Command;
+import com.davidgeorgewilliams.workflows.commands.Command;
 import picocli.CommandLine;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;

@@ -1,4 +1,4 @@
-package com.davidgeorgewilliams.workflow.commands;
+package com.davidgeorgewilliams.workflows.commands;
 
 import lombok.AccessLevel;
 import lombok.Builder;

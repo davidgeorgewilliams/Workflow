@@ -1,4 +1,4 @@
-package com.davidgeorgewilliams.workflow.threads;
+package com.davidgeorgewilliams.workflows.threads;
 
 import lombok.Builder;
 import lombok.NonNull;

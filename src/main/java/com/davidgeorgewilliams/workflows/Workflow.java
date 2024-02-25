@@ -1,5 +1,6 @@
-package com.davidgeorgewilliams.workflow.workflows;
+package com.davidgeorgewilliams.workflows;
 
+import com.davidgeorgewilliams.workflows.workers.WorkerPool;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
