@@ -35,7 +35,6 @@ creating, managing, and executing parallel workflows in Java applications.
 To include `Workflows` in your Maven project, add the following dependency to your `pom.xml`:
 
 ```xml
-
 <dependency>
     <groupId>com.davidgeorgewilliams</groupId>
     <artifactId>Workflows</artifactId>
@@ -54,6 +53,42 @@ by [Azul Systems Inc.](https://www.azul.com/)
 The `Workflows` library exposes a high-level API for constructing and executing workflows composed of dependent tasks,
 enabling efficient parallel processing. The API is centered around four main
 constructs: `Workflow`, `WorkerPool`, `Worker`, and `ThreadPool`.
+
+## Self-Contained Example
+
+The following example demonstrates how to use Workflows to process a set of tasks in parallel, leveraging the power of multi-threading to enhance performance.
+
+Imagine you have a list of 100 mathematical operations that you need to perform - specifically, calculating the natural logarithm of numbers 1 through 100. Using Workflows, you can efficiently distribute these calculations across multiple threads, corresponding to the number of available processors on your system.
+
+Here's a simple yet powerful example:
+
+```java
+final Set<Worker<?>> workers = new HashSet<>();
+for (int i = 0; i < 100; i++) {
+    final double value = 1.0 * (i + 1);
+    final Worker<Double> worker = Worker.of(() -> Math.log(value));
+    workers.add(worker);
+}
+final int processors = Runtime.getRuntime().availableProcessors();
+final ThreadPool threadPool = ThreadPool.of(processors);
+final WorkerPool workerPool = WorkerPool.of(workers, threadPool);
+workerPool.process();
+for (final Worker<?> worker : workers) {
+    final double logValue = (double) worker.result();
+    final double value = Math.exp(logValue);
+    final ThreadLocalTime completed = worker.completed();
+    log.info(String.format("completed=%s value=%s logValue=%s", completed, value, logValue));
+}
+```
+In this code snippet:
+
+We create a Worker for each operation, which contains the task to be executed - in this case, calculating the logarithm.
+These `Worker` instances are added to a `WorkerPool`, signifying a group of tasks to be run together.
+A `ThreadPool` manages the execution of these tasks across multiple threads.
+Once the `WorkerPool` is instructed to process the tasks, each Worker executes its operation in parallel, utilizing the full capabilities of the system's CPU.
+After processing, we log the results of each task, including the completion time and the values calculated.
+
+This example not only showcases the simplicity and elegance with which Workflows handles concurrent operations but also highlights the ease with which computationally intensive tasks can be parallelized, resulting in significant performance gains. It's an ideal framework for businesses and engineers looking to optimize their processing capabilities, reduce latency, and achieve superior throughput in their applications.
 
 ## Class Overview and Usage
 
