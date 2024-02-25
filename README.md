@@ -48,12 +48,6 @@ For optimal performance and compatibility, it is recommended to
 use [Azul Zulu 21](https://www.azul.com/downloads/?version=java-21-lts&package=jdk#zulu), provided
 by [Azul Systems Inc.](https://www.azul.com/)
 
-## API Overview
-
-The `Workflows` library exposes a high-level API for constructing and executing workflows composed of dependent tasks,
-enabling efficient parallel processing. The API is centered around four main
-constructs: `Workflow`, `WorkerPool`, `Worker`, and `ThreadPool`.
-
 ## Self-Contained Example
 
 The following example demonstrates how to use Workflows to process a set of tasks in parallel, leveraging the power of multi-threading to enhance performance.
@@ -91,6 +85,10 @@ After processing, we log the results of each task, including the completion time
 This example not only showcases the simplicity and elegance with which Workflows handles concurrent operations but also highlights the ease with which computationally intensive tasks can be parallelized, resulting in significant performance gains. It's an ideal framework for businesses and engineers looking to optimize their processing capabilities, reduce latency, and achieve superior throughput in their applications.
 
 ## Class Overview and Usage
+
+The `Workflows` library exposes a high-level API for constructing and executing workflows composed of dependent tasks,
+enabling efficient parallel processing. The API is centered around four main
+constructs: `Workflow`, `WorkerPool`, `Worker`, and `ThreadPool`.
 
 ### Workflow
 
