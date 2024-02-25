@@ -1,14 +1,14 @@
 # Workflows
 
-![Workflows Visual Representation](docs/Workflow.png)
-
-## About Workflows
-
 Workflows is an advanced Java library that furnishes a high-level abstraction layer for parallel workflow management and
 execution engine construction. It empowers developers to articulate and execute complex, dependent tasks in a concurrent
 environment with ease and precision. Built on the foundation of modern concurrent programming paradigms, Workflows
 streamlines the process of defining and managing task relationships and execution order through a domain-specific
 language crafted for simplicity and power.
+
+![Workflows Visual Representation](docs/Workflow.png)
+
+## Introduction
 
 At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of **WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over thread
 pools, utilizing 'after' semantics for defining task dependencies and ensuring logical execution order; **Worker**
@@ -120,6 +120,9 @@ Email: david@davidgeorgewilliams.com
 ## Special Thanks
 
 Special thanks to Oliver Saleh, Deepak Kapur, and the Applied Machine Learning team at Apple Inc. for their support and
-encouragement during the research and development of this new paradigm in concurrent programming. This library is
-affectionately dedicated to Steve Jobs and officially published on his birthday, as a tribute to his enduring legacy in
+encouragement during the research and development of this new paradigm in concurrent programming. 
+
+## Dedication
+
+This library is dedicated to Steve Jobs and officially published on his birthday, as a tribute to his enduring legacy in
 technology and innovation.
