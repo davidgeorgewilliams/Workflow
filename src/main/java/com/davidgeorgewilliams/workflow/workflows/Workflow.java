@@ -1,4 +1,4 @@
-package davidgeorgewilliams;
+package com.davidgeorgewilliams.workflow.workflows;
 
 import lombok.AccessLevel;
 import lombok.Getter;

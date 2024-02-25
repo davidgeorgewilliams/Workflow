@@ -1,10 +1,10 @@
-package davidgeorgewilliams;
+package com.davidgeorgewilliams.workflow.workflows;
 
-import davidgeorgewilliams.threads.ThreadLocalTime;
+import com.davidgeorgewilliams.workflow.threads.ThreadLocalTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
@@ -16,9 +16,9 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 @Accessors(fluent = true)
+@Builder(access = AccessLevel.PRIVATE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Getter(value = AccessLevel.PUBLIC)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Worker<T> {
     @NonFinal @Setter ThreadLocalTime completed;
     @NonFinal @Setter ThreadLocalTime finished;
@@ -44,7 +44,7 @@ public class Worker<T> {
     public static <T> Worker<T> of(@NonNull final Set<Worker<?>> after,
                                    @NonNull final String id,
                                    @NonNull final Supplier<T> supplier) {
-        return new Worker<>(after, id, supplier);
+        return Worker.<T>builder().after(after).id(id).supplier(supplier).build();
     }
 
     public final boolean isReady() {

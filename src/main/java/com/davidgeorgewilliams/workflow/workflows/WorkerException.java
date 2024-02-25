@@ -1,4 +1,4 @@
-package davidgeorgewilliams;
+package com.davidgeorgewilliams.workflow.workflows;
 
 import lombok.NonNull;
 
@@ -12,6 +12,6 @@ public class WorkerException extends RuntimeException {
     }
 
     public static WorkerException of(@NonNull final Worker<?> worker) {
-        return WorkerException.of(worker.throwable());
+        return of(worker.throwable());
     }
 }

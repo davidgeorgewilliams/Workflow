@@ -1,47 +1,59 @@
-package davidgeorgewilliams;
+package com.davidgeorgewilliams.workflow.workflows;
 
-import davidgeorgewilliams.threads.ThreadLocalTime;
-import davidgeorgewilliams.threads.ThreadPool;
+import com.davidgeorgewilliams.workflow.threads.ThreadLocalTime;
+import com.davidgeorgewilliams.workflow.threads.ThreadPool;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Builder;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.experimental.Accessors;
-import lombok.experimental.FieldDefaults;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @Accessors(fluent = true)
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Getter(value = AccessLevel.PUBLIC)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(access = AccessLevel.PRIVATE)
+@Value
 public class WorkerPool {
-    ThreadPool threadPool;
     Set<Worker<?>> workers;
     String id;
     Supplier<WorkerPool> next;
+    ThreadPool threadPool;
+
+    public static WorkerPool of(@NonNull final Set<Worker<?>> workers) {
+        return WorkerPool.of(workers, ThreadPool.of(Runtime.getRuntime().availableProcessors()));
+    }
 
     public static WorkerPool of(@NonNull final Set<Worker<?>> workers,
-                                @NonNull final ThreadPool cynthiaThreadPool) {
-        return new WorkerPool(cynthiaThreadPool, workers, UUID.randomUUID().toString(), () -> null);
+                                @NonNull final ThreadPool threadPool) {
+        return WorkerPool.of(UUID.randomUUID().toString(), workers, () -> null, threadPool);
     }
 
     public static WorkerPool of(@NonNull final String id,
                                 @NonNull final Set<Worker<?>> workers,
-                                @NonNull final ThreadPool cynthiaThreadPool) {
-        return new WorkerPool(cynthiaThreadPool, workers, id, () -> null);
+                                @NonNull final ThreadPool threadPool) {
+        return WorkerPool.of(id, workers, () -> null, threadPool);
     }
 
     public static WorkerPool of(@NonNull final String id,
                                 @NonNull final Set<Worker<?>> workers,
                                 @NonNull final Supplier<WorkerPool> next,
                                 @NonNull final ThreadPool threadPool) {
-        return new WorkerPool(threadPool, workers, id, next);
+        return WorkerPool.builder()
+                .id(id)
+                .threadPool(threadPool)
+                .workers(workers)
+                .next(next)
+                .build();
     }
 
-    public final void process() {
+    public void process() {
         final Deque<Worker<?>> deque = new ArrayDeque<>(workers());
         final List<CompletableFuture<?>> completableFutures = new ArrayList<>();
         while (!deque.isEmpty()) {
