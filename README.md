@@ -10,8 +10,8 @@ language crafted for simplicity and power.
 
 ## Introduction
 
-At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of *
-*WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over thread
+At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of 
+**WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over thread
 pools, utilizing 'after' semantics for defining task dependencies and ensuring logical execution order; **Worker**
 encapsulates tasks with execution metadata, leveraging the `Supplier` interface for clear task definitions and detailed
 execution tracking; and **ThreadPool** streamlines asynchronous task management, providing a simplified interface for
