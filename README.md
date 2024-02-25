@@ -152,7 +152,7 @@ thus enabling flexible execution strategies including synchronous waits or non-b
 Essentially, `ThreadPool` enhances the scalability and responsiveness of applications by optimizing resource utilization
 and parallelizing task execution.
 
-## Author
+## About the Author
 
 **Name**: David George Williams  
 **Location**: United Kingdom  

@@ -1,5 +1,6 @@
 package com.davidgeorgewilliams.workflows.commands;
 
+import com.davidgeorgewilliams.workflows.Workflow;
 import com.davidgeorgewilliams.workflows.threads.ThreadLocalTime;
 import com.davidgeorgewilliams.workflows.threads.ThreadPool;
 import com.davidgeorgewilliams.workflows.workers.Worker;
@@ -34,7 +35,7 @@ public class DemoCommand implements Callable<Integer> {
         final int processors = Runtime.getRuntime().availableProcessors();
         final ThreadPool threadPool = ThreadPool.of(processors);
         final WorkerPool workerPool = WorkerPool.of(workers, threadPool);
-        workerPool.process();
+        Workflow.of(workerPool).process();
         for (final Worker<?> worker : workers) {
             final double logValue = (double) worker.result();
             final double value = Math.exp(logValue);
