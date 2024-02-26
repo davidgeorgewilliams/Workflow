@@ -50,7 +50,7 @@ dependency block to your project's `pom.xml` file:
 <dependency>
     <groupId>com.davidgeorgewilliams</groupId>
     <artifactId>Workflows</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 </dependency>
 ```
 
