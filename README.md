@@ -63,30 +63,22 @@ Here's a simple yet powerful example:
 
 ```java
 final Set<Worker<?>> workers = new HashSet<>();
-for(
-int i = 0;
-i< 100;i++){
-final double value = 1.0 * (i + 1);
-final Worker<Double> worker = Worker.of(() -> Math.log(value));
-    workers.
-
-add(worker);
+for (int i = 0; i < 100; i++) {
+    final double value = 1.0 * (i + 1);
+    final Worker<Double> worker = Worker.of(() -> Math.log(value));
+    workers.add(worker);
 }
 final int processors = Runtime.getRuntime().availableProcessors();
 final ThreadPool threadPool = ThreadPool.of(processors);
 final WorkerPool workerPool = WorkerPool.of(workers, threadPool);
-workerPool.
-
-process();
-for(
-final Worker<?> worker :workers){
-final double logValue = (double) worker.result();
-final double value = Math.exp(logValue);
-final ThreadLocalTime completed = worker.completed();
-    log.
-
-info(String.format("completed=%s value=%s logValue=%s", completed, value, logValue));
-        }
+Workflow.of(workerPool).process();
+for (final Worker<?> worker : workers) {
+    final double logValue = (double) worker.result();
+    final double value = Math.exp(logValue);
+    final ThreadLocalTime completed = worker.completed();
+    log.info(String.format("completed=%s value=%s logValue=%s", completed, value, logValue));
+}
+return 0;
 ```
 
 In this code snippet:
