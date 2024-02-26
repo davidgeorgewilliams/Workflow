@@ -77,7 +77,6 @@ Here's a simple yet powerful example:
 public class WorkflowExample implements Callable<Integer> {
     
     @Override
-    @SneakyThrows
     public Integer call() {
         final Set<Worker<?>> workers = new HashSet<>();
         for (int i = 0; i < 100; i++) {
