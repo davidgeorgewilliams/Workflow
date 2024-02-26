@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class Worker<T> {
     @NonFinal @Setter ThreadLocalTime submitted;
     @NonFinal @Setter T result;
     @NonFinal @Setter Throwable throwable;
-    @NonFinal @Setter boolean parallel = true;
+    @NonFinal @Setter boolean parallel;
     @NonNull Set<Worker<?>> after;
     @NonNull String id;
     @NonNull Supplier<T> supplier;
@@ -38,14 +39,27 @@ public class Worker<T> {
 
     public static <T> Worker<T> of(@NonNull final String id,
                                    @NonNull final Supplier<T> supplier) {
-        return Worker.of(Set.of(), id, supplier);
+        return Worker.of(new HashSet<>(), id, supplier);
     }
 
     public static <T> Worker<T> of(@NonNull final Set<Worker<?>> after,
                                    @NonNull final String id,
                                    @NonNull final Supplier<T> supplier) {
-        return Worker.<T>builder().after(after).id(id).supplier(supplier).build();
+        return Worker.of(after, id, supplier, true);
     }
+
+    public static <T> Worker<T> of(@NonNull final Set<Worker<?>> after,
+                                   @NonNull final String id,
+                                   @NonNull final Supplier<T> supplier,
+                                   final boolean parallel) {
+        return Worker.<T>builder()
+                .after(after)
+                .id(id)
+                .parallel(parallel)
+                .supplier(supplier)
+                .build();
+    }
+
 
     public final boolean isReady() {
         for (final Worker<?> worker : after()) {
@@ -68,6 +82,16 @@ public class Worker<T> {
         } catch (final Throwable t) {
             throwable(t);
             throw WorkerException.of(t);
+        }
+    }
+
+    public void after(@NonNull final Worker<T> worker) {
+        this.after().add(worker);
+    }
+
+    public void after(@NonNull final Set<Worker<?>> workers) {
+        for (final Worker<?> worker : workers) {
+            this.after().add(worker);
         }
     }
 }

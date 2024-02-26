@@ -16,7 +16,7 @@ import java.time.ZoneId;
 @Accessors(fluent = true, chain = true)
 @Builder
 @Value
-public class ThreadLocalTime {
+public class ThreadLocalTime implements Comparable<ThreadLocalTime> {
     LocalDateTime localDateTime;
     ZoneId zoneId;
 
@@ -34,5 +34,10 @@ public class ThreadLocalTime {
 
     public Instant instant() {
         return localDateTime().toInstant(zoneId().getRules().getOffset(localDateTime()));
+    }
+
+    @Override
+    public int compareTo(@NonNull final ThreadLocalTime threadLocalTime) {
+        return (int) Math.signum(this.instant().compareTo(threadLocalTime.instant()));
     }
 }

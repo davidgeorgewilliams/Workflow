@@ -47,7 +47,6 @@ After successfully building the project, incorporate `Workflows` into your appli
 dependency block to your project's `pom.xml` file:
 
 ```xml
-
 <dependency>
     <groupId>com.davidgeorgewilliams</groupId>
     <artifactId>Workflows</artifactId>
@@ -60,7 +59,7 @@ This ensures that the locally built version of `Workflows` is recognized and use
 ### Recommended JDK
 
 For optimal performance and compatibility, it is recommended to
-use [Azul Zulu 21](https://www.azul.com/downloads/?version=java-21-lts&package=jdk#zulu), provided
+use [Azul Zulu 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu), provided
 by [Azul Systems Inc.](https://www.azul.com/)
 
 ### Self-Contained Example
@@ -107,6 +106,35 @@ This example not only showcases the simplicity and elegance with which Workflows
 highlights the ease with which computationally intensive tasks can be parallelized, resulting in significant performance
 gains. It's an ideal framework for businesses and engineers looking to optimize their processing capabilities, reduce
 latency, and achieve superior throughput in their applications.
+
+### After Semantics
+
+The **Workflows** library significantly streamlines the management of logical execution sequences with an elegantly simple concept: specifying that a worker should run `after` another. This approach is exemplified in the scenario where `workerB` and `workerC` are configured to execute following `workerA`, and `workerD` is designated to run subsequent to both `workerB` and `workerC`.
+
+Consider the following code snippet for a clearer understanding:
+
+```java
+@Test
+public void testAfterSemantics() {
+    final String messageTemplate = "Hello from worker%s";
+    final Worker<String> workerA = Worker.of(() -> String.format(messageTemplate, "A"));
+    final Worker<String> workerB = Worker.of(() -> String.format(messageTemplate, "B"));
+    final Worker<String> workerC = Worker.of(() -> String.format(messageTemplate, "C"));
+    final Worker<String> workerD = Worker.of(() -> String.format(messageTemplate, "D"));
+    workerB.after(workerA);
+    workerC.after(workerA);
+    workerD.after(Set.of(workerB, workerC));
+    final WorkerPool workerPool = WorkerPool.of(Set.of(workerA, workerB, workerC, workerD));
+    final Workflow workflow = Workflow.of(workerPool);
+    workflow.process();
+    assertEquals(workerB.completed().compareTo(workerA.completed()), 1);
+    assertEquals(workerC.completed().compareTo(workerA.completed()), 1);
+    assertEquals(workerD.completed().compareTo(workerB.completed()), 1);
+    assertEquals(workerD.completed().compareTo(workerC.completed()), 1);
+}
+```
+
+This setup illustrates a "diamond" pattern of execution over time: `workerA` initiates the process, followed by a concurrent execution of `workerB` and `workerC`, and culminating with `workerD` merging the paths forged by `workerB` and `workerC`. The assertions included in the code validate that each worker completes its execution in the intended order, ensuring a coherent and predictable workflow.
 
 ## Class Overview and Usage
 
