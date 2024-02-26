@@ -10,8 +10,9 @@ language crafted for simplicity and power.
 
 ## Introduction
 
-At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of 
-**WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over thread
+At the heart of Workflows lies a suite of elegantly designed constructs: **Workflow** orchestrates sequences of
+**WorkerPool** objects, enabling cascading task execution; **WorkerPool** serves as an innovative abstraction over
+thread
 pools, utilizing 'after' semantics for defining task dependencies and ensuring logical execution order; **Worker**
 encapsulates tasks with execution metadata, leveraging the `Supplier` interface for clear task definitions and detailed
 execution tracking; and **ThreadPool** streamlines asynchronous task management, providing a simplified interface for
@@ -33,16 +34,28 @@ creating, managing, and executing parallel workflows in Java applications.
 
 ### Maven Coordinate
 
-To include `Workflows` in your Maven project, add the following dependency to your `pom.xml`:
+To integrate `Workflows` into your Maven project, you'll first need to clone the repository and build the artifact
+locally. Execute the following commands in your terminal:
+
+```bash
+git clone https://github.com/davidgeorgewilliams/Workflows.git
+cd Workflows
+mvn clean install
+```
+
+After successfully building the project, incorporate `Workflows` into your application by adding the following
+dependency block to your project's `pom.xml` file:
 
 ```xml
 
 <dependency>
     <groupId>com.davidgeorgewilliams</groupId>
     <artifactId>Workflows</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
+
+This ensures that the locally built version of `Workflows` is recognized and used by your Maven project.
 
 ### Recommended JDK
 
@@ -63,22 +76,33 @@ Here's a simple yet powerful example:
 
 ```java
 final Set<Worker<?>> workers = new HashSet<>();
-for (int i = 0; i < 100; i++) {
-    final double value = 1.0 * (i + 1);
-    final Worker<Double> worker = Worker.of(() -> Math.log(value));
-    workers.add(worker);
+for(
+int i = 0;
+i< 100;i++){
+final double value = 1.0 * (i + 1);
+final Worker<Double> worker = Worker.of(() -> Math.log(value));
+    workers.
+
+add(worker);
 }
 final int processors = Runtime.getRuntime().availableProcessors();
 final ThreadPool threadPool = ThreadPool.of(processors);
 final WorkerPool workerPool = WorkerPool.of(workers, threadPool);
-Workflow.of(workerPool).process();
-for (final Worker<?> worker : workers) {
-    final double logValue = (double) worker.result();
-    final double value = Math.exp(logValue);
-    final ThreadLocalTime completed = worker.completed();
-    log.info(String.format("completed=%s value=%s logValue=%s", completed, value, logValue));
-}
-return 0;
+Workflow.
+
+of(workerPool).
+
+process();
+for(
+final Worker<?> worker :workers){
+final double logValue = (double) worker.result();
+final double value = Math.exp(logValue);
+final ThreadLocalTime completed = worker.completed();
+    log.
+
+info(String.format("completed=%s value=%s logValue=%s", completed, value, logValue));
+        }
+        return 0;
 ```
 
 In this code snippet:
