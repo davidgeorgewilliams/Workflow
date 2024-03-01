@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-@Accessors(fluent = true)
+@Accessors(fluent = true, chain = true)
 @Builder(access = AccessLevel.PRIVATE)
 @Value
 public class ThreadPoolStatus {

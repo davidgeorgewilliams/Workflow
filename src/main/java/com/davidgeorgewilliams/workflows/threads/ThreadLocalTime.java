@@ -1,5 +1,6 @@
 package com.davidgeorgewilliams.workflows.threads;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
@@ -14,7 +15,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 
 @Accessors(fluent = true, chain = true)
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 @Value
 public class ThreadLocalTime implements Comparable<ThreadLocalTime> {
     LocalDateTime localDateTime;

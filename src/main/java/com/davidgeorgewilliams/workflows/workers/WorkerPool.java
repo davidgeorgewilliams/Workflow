@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-@Accessors(fluent = true)
+@Accessors(fluent = true, chain = true)
 @Builder(access = AccessLevel.PRIVATE)
 @Value
 public class WorkerPool {

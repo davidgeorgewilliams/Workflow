@@ -3,11 +3,10 @@ package com.davidgeorgewilliams.workflows.workers;
 import com.davidgeorgewilliams.workflows.threads.ThreadLocalTime;
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.Value;
 import lombok.experimental.Accessors;
-import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 
 import java.util.HashSet;
@@ -16,10 +15,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-@Accessors(fluent = true)
+@Accessors(fluent = true, chain = true)
 @Builder(access = AccessLevel.PRIVATE)
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Getter(value = AccessLevel.PUBLIC)
+@Value
 public class Worker<T> {
     @NonFinal @Setter ThreadLocalTime completed;
     @NonFinal @Setter ThreadLocalTime finished;

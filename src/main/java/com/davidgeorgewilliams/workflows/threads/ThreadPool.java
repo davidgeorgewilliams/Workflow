@@ -1,5 +1,6 @@
 package com.davidgeorgewilliams.workflows.threads;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
@@ -8,11 +9,10 @@ import lombok.experimental.Accessors;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
-@Accessors(fluent = true)
-@Builder
+@Accessors(fluent = true, chain = true)
+@Builder(access = AccessLevel.PRIVATE)
 @Value
 public class ThreadPool {
     ExecutorService executorService;

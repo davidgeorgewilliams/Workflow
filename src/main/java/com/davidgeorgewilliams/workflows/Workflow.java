@@ -2,20 +2,18 @@ package com.davidgeorgewilliams.workflows;
 
 import com.davidgeorgewilliams.workflows.workers.WorkerPool;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Builder;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.experimental.Accessors;
-import lombok.experimental.FieldDefaults;
 
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-@Accessors(fluent = true)
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Getter(value = AccessLevel.PUBLIC)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@Accessors(fluent = true, chain = true)
+@Builder(access = AccessLevel.PRIVATE)
+@Value
 public class Workflow {
     String id;
     WorkerPool root;
@@ -30,7 +28,7 @@ public class Workflow {
         return new Workflow(id, root);
     }
 
-    public final void process() {
+    public void process() {
         WorkerPool cursor = root();
         while (Objects.nonNull(cursor)) {
             cursor.process();
