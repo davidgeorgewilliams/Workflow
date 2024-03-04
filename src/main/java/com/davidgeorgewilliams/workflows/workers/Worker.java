@@ -59,7 +59,7 @@ public class Worker<T> {
     }
 
 
-    public final boolean isReady() {
+    public boolean isReady() {
         for (final Worker<?> worker : after()) {
             if (Objects.nonNull(worker.throwable())) {
                 throw WorkerException.of(worker);
@@ -71,7 +71,7 @@ public class Worker<T> {
         return true;
     }
 
-    public final T process() {
+    public T process() {
         try {
             started(ThreadLocalTime.of());
             result(supplier().get());
