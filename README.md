@@ -74,6 +74,7 @@ threads, corresponding to the number of available processors on your system.
 Here's a simple yet powerful example:
 
 ```java
+@Slf4j
 public class WorkflowExample implements Callable<Integer> {
     
     @Override
